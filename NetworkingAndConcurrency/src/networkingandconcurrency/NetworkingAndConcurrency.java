@@ -10,6 +10,7 @@ package networkingandconcurrency;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,6 +20,11 @@ import javax.swing.*;
 import java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+import networkingandconcurrency.NetworkingAndConcurrency.ServerThread.ClientThread;
 
 /**
  *
@@ -36,12 +42,14 @@ public class NetworkingAndConcurrency
            ServerThreadArray = new ServerThread[10];
       
            ClientThread CThread = new ClientThread();
+           ClientThread CThread1 = new ClientThread();
           // for(int i = 0; i< 1; i++)
                      
                 ServerThreadArray[0] = new ServerThread();
               // ServerThreadArray[0].start();
                 
            CThread.start();
+       
          
           
            
@@ -81,72 +89,117 @@ public class NetworkingAndConcurrency
             Panel =   InitSetUpPanel(Panel,Frame);
             Panel.Label.setText("Server");
                  
-         DefaultServer Server = new DefaultServer();
+     /*    DefaultClient Server = new DefaultClient();
             try {
                 Server.listen();
             } catch (IOException ex) {
                 Logger.getLogger(NetworkingAndConcurrency.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-        }
+        }*/
         
+    }
+         public static class test
+    {
+           
+        test()
+        {
+            int x  = 0;
+            String  my = "Adfas";
+        }
     }
      public static class ClientThread extends Thread 
     {
             
+         
          Socket s;
          InputStream Input;
-        //String Buffer;
+        String Buffer = "John Wojton";
         char buffer[] = new char[1000];
         public void run()
         {
-            SocketAddress SA;
-            SA = new InetSocketAddress("192.168.237.1", 4000);
-            String you = "Hello Mr. Server";
-            JFrame Frame = null;
-            DefaultPanel Panel = null;
-            
-                 Frame =   InitSetUpFrame(Frame);
-                 Panel =   InitSetUpPanel(Panel,Frame);
-                 Panel.Label.setText("Client");
-            try {
-              
-              
-                   OutputStream Output;
-              
-                   s = new Socket("192.168.1.9", 4000);
-                  //s.connect(new InetSocketAddress("192.168.1.9", 4000), 1000);
+            //try {
+                SocketAddress SA;
+                //   SA = new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), 4000);
+                String you = "Hello Mr. Server";
+                JFrame Frame = null;
+                DefaultPanel Panel = null;
+                
+                Frame =   InitSetUpFrame(Frame);
+                Panel =   InitSetUpPanel(Panel,Frame);
+                Panel.Label.setText("Client");
+                try {
                     
-                //  s.connect(SA);
-               
-                Input = s.getInputStream();
+                    
+                    OutputStream Output;
+                    
+                    s = new Socket(InetAddress.getLocalHost().getHostAddress(), 4000);
+                    //s.connect(new InetSocketAddress("192.168.1.9", 4000), 1000);
+                    
+                    //  s.connect(SA);
+                    
+                    Input = s.getInputStream();
+                    
+                    BufferedReader in =
+                            new BufferedReader(
+                                    new InputStreamReader(s.getInputStream()));
+                    boolean result;
+                    result = in.ready();
+                    System.out.println(result);
+                    
+                    int read;
+                    System.out.println("Reading");
+                    read = in.read(buffer, 0, 1000);
+                    System.out.println("Done Reading");
+                    
+                    
+                    
+                    
+                    
+                    Input  = s.getInputStream();
+                    Output = s.getOutputStream();
+                    
+                    BufferedWriter out =
+                            new BufferedWriter(
+                                    new OutputStreamWriter(s.getOutputStream()));
+                    System.out.println("Writing");
+                    s.setSendBufferSize(20);
+                    out.write(Buffer, 0, 11);
+                    out.flush();
+                    System.out.println("ADFSADF");
+                    
+                    //  System.out.println(read);
+                    System.out.println(buffer);
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(NetworkingAndConcurrency.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
-                 BufferedReader in =
-                 new BufferedReader(
-                 new InputStreamReader(s.getInputStream()));
-               boolean result;
-                result = in.ready();
-                System.out.println(result);
-               
-                 int read;
-                 System.out.println("Reading");
-                read = in.read(buffer, 0, 5);
-                System.out.println("Done Reading");
-             
+            /*    test a = new test();
                 
-                System.out.println(read);
-                System.out.println(buffer);
+                File file = new File("C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\file.xml");
+                JAXBContext jaxbContext = JAXBContext.newInstance(a.getClass());
+                Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
                 
-            } catch (IOException ex) {
+                // output pretty printed
+                jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+                
+                jaxbMarshaller.marshal(a, file);
+                jaxbMarshaller.marshal(a, System.out);
+                /*     for(int i = 0; i <11; i++)
+                {
+                System.out.println(i);
+                System.out.println(buffer[i]);
+                }*/
+             /*
+            catch (JAXBException ex) {
                 Logger.getLogger(NetworkingAndConcurrency.class.getName()).log(Level.SEVERE, null, ex);
-            }
-      /*     for(int i = 0; i <11; i++)
-           {
-               System.out.println(i);
-             System.out.println(buffer[i]);
-           }*/
+            }*/
         }
         
     }
-    
+    }
+   
 }
+    
+
