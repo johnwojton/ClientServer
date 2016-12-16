@@ -54,16 +54,20 @@ public class ServerProject {
     {
         public void run()
         {
-           
-           XMLFileController.XMLWrite();
+           String FileName = "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml";
+           UserInformation CustomerInfo = new UserInformation();
+           CustomerInfo.Name = "Jill Stein";
+           CustomerInfo.age  = 6245;
+           XMLFileController.XMLWrite(CustomerInfo, FileName);
             JFrame Frame = null;
             DefaultPanel Panel = null;
             
             Frame =   InitSetUpFrame(Frame);
             Panel =   InitSetUpPanel(Panel,Frame);
             Panel.Label.setText("Server");
+            UserInformation OtherInfo = new UserInformation();
             try {
-                XMLFileController.XMLReader("C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
+             OtherInfo =  XMLFileController.XMLReader(FileName);
             } catch (JAXBException ex) {
                 Logger.getLogger(ServerProject.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -73,7 +77,9 @@ public class ServerProject {
             } catch (IOException ex) {
                 Logger.getLogger(ServerProject.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+            System.out.println("here is what is in the file");
+             System.out.println(OtherInfo.Name);
+              System.out.println(OtherInfo.age);
         }
         
     }

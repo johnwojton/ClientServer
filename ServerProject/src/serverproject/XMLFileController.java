@@ -23,19 +23,17 @@ import serverproject.UserInformation;
 
 public class XMLFileController 
 {
-    public static void XMLWrite()
+    public static void XMLWrite(UserInformation customer, String FileName)
     {
      ////   Date DOB = null;
       //  DOB.setTime(1243);
        // DOB.setDate(2452);
-     UserInformation customer = new UserInformation();
-      customer.setName("jack");
-      customer.setDOB(null);
-      customer.setAge(34);
+   
+    
 
       try {
 
-        File file = new File("C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
+        File file = new File(FileName);
         JAXBContext jaxbContext = JAXBContext.newInstance(UserInformation.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 

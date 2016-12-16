@@ -38,14 +38,14 @@ public class NetworkingAndConcurrency
      */
     public static void main(String[] args) 
     {
-           ServerThread[] ServerThreadArray;
-           ServerThreadArray = new ServerThread[10];
+          // ServerThread[] ServerThreadArray;
+         //  ServerThreadArray = new ServerThread[10];
       
            ClientThread CThread = new ClientThread();
-           ClientThread CThread1 = new ClientThread();
+         //  ClientThread CThread1 = new ClientThread();
           // for(int i = 0; i< 1; i++)
                      
-                ServerThreadArray[0] = new ServerThread();
+               // ServerThreadArray[0] = new ServerThread();
               // ServerThreadArray[0].start();
                 
            CThread.start();
@@ -165,6 +165,7 @@ public class NetworkingAndConcurrency
                     System.out.println("Writing");
                     s.setSendBufferSize(20);
                     out.write(Buffer, 0, 11);
+                   
                     out.flush();
                     System.out.println("ADFSADF");
                     
