@@ -5,11 +5,13 @@
  */
 package serverproject;
 
+//import import java.awt.Color;
 import java.awt.Color;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.xml.bind.JAXBException;
 
 /**
  *
@@ -53,13 +55,18 @@ public class ServerProject {
         public void run()
         {
            
+           XMLFileController.XMLWrite();
             JFrame Frame = null;
             DefaultPanel Panel = null;
             
             Frame =   InitSetUpFrame(Frame);
             Panel =   InitSetUpPanel(Panel,Frame);
             Panel.Label.setText("Server");
-                 
+            try {
+                XMLFileController.XMLReader("C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
+            } catch (JAXBException ex) {
+                Logger.getLogger(ServerProject.class.getName()).log(Level.SEVERE, null, ex);
+            }
          DefaultServer Server = new DefaultServer();
             try {
                 Server.listen();
