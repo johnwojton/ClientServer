@@ -22,6 +22,17 @@ public class UserInformation
      Date DOB;
       // @XmlElement(name="age")
     int age;
+    
+    enum Gender
+    {
+        male, female
+    };
+    Gender gender;
+    
+    public void setGender(Gender gender)
+    {
+        this.gender = gender;
+    }
     public void setName(String Tname)
     {
         Name = Tname;
@@ -45,6 +56,10 @@ public class UserInformation
     public int getAge()
     {
         return this.age;
+    }
+    public Gender getGender()
+    {
+        return this.gender;
     }
     
 }

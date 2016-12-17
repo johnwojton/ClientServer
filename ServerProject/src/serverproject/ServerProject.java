@@ -18,7 +18,7 @@ import javax.xml.bind.JAXBException;
  * @author Admin
  */
 public class ServerProject {
-
+  public static UserInformation CustomerInfo;
     /**
      * @param args the command line arguments
      */
@@ -55,7 +55,7 @@ public class ServerProject {
         public void run()
         {
            String FileName = "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml";
-           UserInformation CustomerInfo = new UserInformation();
+           CustomerInfo = new UserInformation();
            CustomerInfo.Name = "Jill Stein";
            CustomerInfo.age  = 6245;
            XMLFileController.XMLWrite(CustomerInfo, FileName);
