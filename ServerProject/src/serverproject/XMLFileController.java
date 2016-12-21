@@ -25,13 +25,7 @@ public class XMLFileController
 {
     public static void XMLWrite(UserInformation customer, String FileName)
     {
-     ////   Date DOB = null;
-      //  DOB.setTime(1243);
-       // DOB.setDate(2452);
-   
-    
-
-      try {
+        try {
 
         File file = new File(FileName);
         JAXBContext jaxbContext = JAXBContext.newInstance(UserInformation.class);
