@@ -41,9 +41,11 @@ public class ServerProject {
             Frame.setBounds(250, 250, 250, 250);
             return Frame;
     }
-    public static DefaultPanel InitSetUpPanel(DefaultPanel Panel, JFrame Frame)
+    public static ContainerPanel InitSetUpPanel(ContainerPanel Panel, JFrame Frame)
     {
-            Panel = new DefaultPanel();
+          //  Panel = new DefaultPanel();
+            
+            Panel = new ContainerPanel(Frame);
             Panel.setBackground(Color.yellow);
             Panel.setVisible(true);
             Frame.add(Panel);
@@ -60,11 +62,11 @@ public class ServerProject {
            CustomerInfo.age  = 6245;
            XMLFileController.XMLWrite(CustomerInfo, FileName);
             JFrame Frame = null;
-            DefaultPanel Panel = null;
+            ContainerPanel Panel = null;
             
             Frame =   InitSetUpFrame(Frame);
             Panel =   InitSetUpPanel(Panel,Frame);
-            Panel.Label.setText("Server");
+            //Panel.Label.setText("Server");
             UserInformation OtherInfo = new UserInformation();
             try {
              OtherInfo =  XMLFileController.XMLReader(FileName);
