@@ -22,13 +22,24 @@ public class UserInformation
      Date DOB;
       // @XmlElement(name="age")
     int age;
+     // @XmlElement(name="USerName")
+    String UserName;
+    // @XmlElement(name="Password")
+    String Password;
     
     enum Gender
     {
         male, female
     };
     Gender gender;
-    
+    public void setUserName(String UserName)
+    {
+        this.UserName = UserName;
+    }
+    public void setPassword(String Password)
+    {
+        this.Password = Password;
+    }
     public void setGender(Gender gender)
     {
         this.gender = gender;
@@ -60,6 +71,14 @@ public class UserInformation
     public Gender getGender()
     {
         return this.gender;
+    }
+     public String getUserName()
+    {
+       return this.UserName;
+    }
+    public String getPassword()
+    {
+       return this.Password;
     }
     
 }
