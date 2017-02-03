@@ -25,10 +25,12 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
     String  User;
     String  PassWd;
     UserInformation customer;
+    ContainerPanel CP;
      String FileName = "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\User02.xml";
-  public LoginScreen(JFrame Frame)
+  public LoginScreen(JFrame Frame, ContainerPanel CP)
    {
         super();
+        this.CP = CP;
         customer = new UserInformation();
         this.setBackground(Color.MAGENTA);
         JLabel Title    = new JLabel("BMI Calculator!");
@@ -36,8 +38,15 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
         JLabel Password = new JLabel("Password");
 
         EnterUserName = new JTextField(30);
+        EnterUserName.setFocusable(true);
+        EnterUserName.setEditable(true);
+
         EnterPassword = new JTextField(30);
+        EnterPassword.setFocusable(true);
+        EnterPassword.setEditable(true);
+                
         this.setLayout(new FlowLayout());
+        
         
         this.add(Title);
         this.add(UserName);
@@ -57,6 +66,7 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
       source =ae.getSource();
       if(source.equals(EnterUserName))
       {
+          System.out.println("num 1");
           User = EnterUserName.getText();
           customer.UserName = User;
           System.out.println(User);
@@ -69,20 +79,36 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
       else if (source.equals(EnterPassword))
       {
         try {
+            User = EnterUserName.getText();
+            customer.UserName = User;
+            System.out.println("num 2");
             PassWd = EnterPassword.getText();
             System.out.println(PassWd);
             customer.Password = PassWd;
             
             customer =   XMLFileController.XMLReader(FileName);
-        } catch (JAXBException ex) {
-            Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            
+            
+            if (PassWd.equals(customer.Password) && User.equals(customer.UserName))
+            {
+                 System.out.println("num 4");
+             //  this.remove(LS);
+              // this.add(DP);
+              this.CP.LoggingIn();
+            }
+            else
+            {
+                 System.out.println("i am locked out");
+            }
+                          } catch (JAXBException ex) {
+              Logger.getLogger(LoginScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
   
       }
    
           
      
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
   
  
     
@@ -91,7 +117,7 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -102,10 +128,11 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
       switch(source)
       {
           case KeyEvent.VK_ENTER:
+              System.out.println("num 3");
           User = EnterUserName.getText();
-          System.out.println(User);         
+          System.out.println("this is the user " + User);         
           PassWd = EnterPassword.getText();
-          System.out.println(PassWd);
+          System.out.println("This is the Password " + PassWd);
           customer.Password = PassWd;
           customer.UserName = User;
            System.out.println("KeyPRessed01");
@@ -122,12 +149,12 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
            break;
         
       }
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
    
 
