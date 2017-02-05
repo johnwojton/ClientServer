@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.xml.bind.JAXBException;
-
+import java.awt.CardLayout;
 
 public class ContainerPanel extends JPanel implements KeyListener, ActionListener
 {
@@ -22,17 +22,22 @@ public class ContainerPanel extends JPanel implements KeyListener, ActionListene
      LoginScreen LS;
      DefaultPanel DP;
      JFrame Frame;
+     CardLayout cardLayout;
     public ContainerPanel(JFrame Frame)
     {
         super();
+        repaint();
         this.Frame = Frame;
+        this.setLayout(new CardLayout());
         LS = new LoginScreen(Frame, this);
          LS.EnterUserName.addActionListener(LS);
          LS.EnterPassword.addActionListener(LS);
          LS.EnterPassword.addKeyListener(LS);
          LS.EnterUserName.addKeyListener(LS);
-        DP = new DefaultPanel();
-        this.add(LS);
+        
+        this.add(LS, "LogIn");
+        cardLayout = (CardLayout) this.getLayout();
+        cardLayout.show(this, "LogIn");
         repaint();
         
         
@@ -103,6 +108,7 @@ public class ContainerPanel extends JPanel implements KeyListener, ActionListene
         {
             System.out.println("num 4");
             this.remove(LS);
+          
             this.add(DP);
         }
         else
@@ -130,7 +136,16 @@ public class ContainerPanel extends JPanel implements KeyListener, ActionListene
     {
             System.out.println("logging out");
             this.remove(LS);
-            this.add(DP);
+              DP = new DefaultPanel(this.Frame);
+            DP.setVisible(true);
+           DP.setBounds( this.getBounds());
+           DP.setEnabled(true);
+          
+            this.add(DP, "DefaultPanel");
+            cardLayout = (CardLayout) this.getLayout();
+            cardLayout.show(this, "DefaultPanel");
+            //DP.validate();
+            //DP.revalidate();
             repaint();
     }
             

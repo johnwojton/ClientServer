@@ -67,6 +67,7 @@ public class ServerProject {
             
             Frame =   InitSetUpFrame(Frame);
             Panel =   InitSetUpPanel(Panel,Frame);
+           
             //Panel.Label.setText("Server");
             UserInformation OtherInfo = new UserInformation();
             try {

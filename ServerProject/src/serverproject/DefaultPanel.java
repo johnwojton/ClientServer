@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package serverproject;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -29,10 +30,47 @@ public class DefaultPanel extends JPanel implements ActionListener
    public JRadioButton Male;
    public JRadioButton Female;
    Gender gender;
-   DefaultPanel()
+   
+   
+   DefaultPanel(JFrame Frame)
    {
        super();
+     this.initVariables();
+     this.addVariables();
+      this.setBackground(Color.WHITE);
+       System.out.println("the width is " + this.getWidth());
+        this.setSize(Frame.getHeight() - 400, Frame.getWidth());
+       repaint();
+   }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) 
+    {
+        Object source = ae.getSource();
+        if(source == Male)
+        {
+            gender = gender.male;
+            System.out.println("Male");
+            ServerProject.CustomerInfo.gender = ServerProject.CustomerInfo.gender.male;
+            XMLFileController.XMLWrite(ServerProject.CustomerInfo, "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
+        }
+        else if (source == Female)
+        {
+            
+            gender = gender.female;
+            System.out.println("Female");
+            ServerProject.CustomerInfo.gender = ServerProject.CustomerInfo.gender.female;
+            XMLFileController.XMLWrite(ServerProject.CustomerInfo, "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
        
+        }
+    }
+    
+    
+    
+    
+    void initVariables()
+    {
+          
       Label  = new JLabel ("Label");
       Gender = new JLabel("Gender");
       Age    = new JLabel   ("Age");
@@ -68,38 +106,25 @@ public class DefaultPanel extends JPanel implements ActionListener
       BG.add(Female);
       
       
+    }
+    void addVariables()
+    {
        this.add(Label);
        this.add(Gender);
        this.add(Age);
        this.add(weight);
        this.setLayout(null);
        
-      
        this.add(Male);
        this.add(Female);
-       System.out.println("the width is " + this.getWidth());
-       
-   }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) 
-    {
-        Object source = ae.getSource();
-        if(source == Male)
-        {
-            gender = gender.male;
-            System.out.println("Male");
-            ServerProject.CustomerInfo.gender = ServerProject.CustomerInfo.gender.male;
-            XMLFileController.XMLWrite(ServerProject.CustomerInfo, "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
-        }
-        else if (source == Female)
-        {
-            
-            gender = gender.female;
-            System.out.println("Female");
-            ServerProject.CustomerInfo.gender = ServerProject.CustomerInfo.gender.female;
-            XMLFileController.XMLWrite(ServerProject.CustomerInfo, "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
-       
-        }
     }
+    
+    
+    
+    
 }
+
+
+
+
+    
