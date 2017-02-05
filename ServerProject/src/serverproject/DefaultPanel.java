@@ -5,6 +5,8 @@
  */
 package serverproject;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -29,6 +31,10 @@ public class DefaultPanel extends JPanel implements ActionListener
    
    public JRadioButton Male;
    public JRadioButton Female;
+   public JButton      Calculate;
+   
+   public JTextField AgeText;
+   public JTextField WeightText;
    Gender gender;
    
    
@@ -71,15 +77,24 @@ public class DefaultPanel extends JPanel implements ActionListener
     void initVariables()
     {
           
-      Label  = new JLabel ("Label");
-      Gender = new JLabel("Gender");
-      Age    = new JLabel   ("Age");
-      weight = new JLabel("Weight");
+      Label      = new     JLabel ("Label");
+      Gender     = new     JLabel("Gender");
+      Age        = new     JLabel   ("Age");
+      weight     = new     JLabel("Weight");
+      WeightText = new         JTextField();
+      AgeText    = new         JTextField();  
+      Calculate  = new JButton("Calculate");
       
+      Calculate.setVisible(true);
+      AgeText.setVisible(true);
+      WeightText.setVisible(true);
       Gender.setVisible(true);
       Age.setVisible(true);
       weight.setVisible(true);
       
+      Calculate.setBounds(130, 150, 150, 50);
+      WeightText.setBounds(110,  105, 50, 20);
+      AgeText.setBounds(110, 85, 50, 20);
       Gender.setBounds(50, 50, 50, 50);
       Age.setBounds(50, 70, 50, 50);
       weight.setBounds(50, 90, 50, 50);
@@ -99,6 +114,8 @@ public class DefaultPanel extends JPanel implements ActionListener
       
       Male.addActionListener(this);
       Female.addActionListener(this);
+      WeightText.addActionListener(this);
+      AgeText.addActionListener(this);
       
       ButtonGroup BG = new ButtonGroup();
       
@@ -109,12 +126,14 @@ public class DefaultPanel extends JPanel implements ActionListener
     }
     void addVariables()
     {
+       this.add(Calculate);
        this.add(Label);
        this.add(Gender);
        this.add(Age);
        this.add(weight);
        this.setLayout(null);
-       
+       this.add(AgeText);
+       this.add(WeightText);
        this.add(Male);
        this.add(Female);
     }
