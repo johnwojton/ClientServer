@@ -5,8 +5,6 @@
  */
 package serverproject;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -18,12 +16,15 @@ import javax.swing.*;
 
 public class DefaultPanel extends JPanel implements ActionListener
 { 
+    int age_int;
+    int weight_int;
    enum Gender 
            { 
                male, female
            };
                    
     
+   public JLabel height;
    public JLabel Label;
    public JLabel Gender;
    public JLabel Age;
@@ -33,6 +34,7 @@ public class DefaultPanel extends JPanel implements ActionListener
    public JRadioButton Female;
    public JButton      Calculate;
    
+   public JTextField HeightText;
    public JTextField AgeText;
    public JTextField WeightText;
    Gender gender;
@@ -69,6 +71,11 @@ public class DefaultPanel extends JPanel implements ActionListener
             XMLFileController.XMLWrite(ServerProject.CustomerInfo, "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml");
        
         }
+        else if (source == Calculate)
+        {
+          age_int    = Integer.parseInt(Age.getText());
+          weight_int = Integer.parseInt(weight.getText());
+        }
     }
     
     
@@ -84,6 +91,8 @@ public class DefaultPanel extends JPanel implements ActionListener
       WeightText = new         JTextField();
       AgeText    = new         JTextField();  
       Calculate  = new JButton("Calculate");
+      HeightText = new         JTextField();
+      height     = new     JLabel("Height");
       
       Calculate.setVisible(true);
       AgeText.setVisible(true);
@@ -91,6 +100,9 @@ public class DefaultPanel extends JPanel implements ActionListener
       Gender.setVisible(true);
       Age.setVisible(true);
       weight.setVisible(true);
+      HeightText.setVisible(true);
+      height.setVisible(true);
+      
       
       Calculate.setBounds(130, 150, 150, 50);
       WeightText.setBounds(110,  105, 50, 20);
@@ -98,6 +110,8 @@ public class DefaultPanel extends JPanel implements ActionListener
       Gender.setBounds(50, 50, 50, 50);
       Age.setBounds(50, 70, 50, 50);
       weight.setBounds(50, 90, 50, 50);
+      height.setBounds(50, 110, 50, 50);
+      HeightText.setBounds(110, 125, 50, 20);
       
       Male   = new JRadioButton  ("Male");
       Female = new JRadioButton("Female");
@@ -116,6 +130,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       Female.addActionListener(this);
       WeightText.addActionListener(this);
       AgeText.addActionListener(this);
+      Calculate.addActionListener(this);
       
       ButtonGroup BG = new ButtonGroup();
       
@@ -136,6 +151,8 @@ public class DefaultPanel extends JPanel implements ActionListener
        this.add(WeightText);
        this.add(Male);
        this.add(Female);
+       this.add(height);
+       this.add(HeightText);
     }
     
     
