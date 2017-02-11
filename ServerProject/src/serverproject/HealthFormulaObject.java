@@ -11,9 +11,16 @@ package serverproject;
  */
 public class HealthFormulaObject 
 {
-    float CalculateBMI(int weight, int height, int age)
+    double PoundsToKilograms(int pounds)
     {
-        float BMI = 0;
-      return BMI;  
+       return pounds/2.2;
+    }
+    double InchesToMeters(int inches)
+    {
+        return inches/39.370;
+    }
+    double CalculateBMI(int weight, int height, int age)
+    {
+      return PoundsToKilograms(weight)/(InchesToMeters(height)*InchesToMeters(height));
     }
 }

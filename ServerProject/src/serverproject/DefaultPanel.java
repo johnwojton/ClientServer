@@ -18,6 +18,10 @@ public class DefaultPanel extends JPanel implements ActionListener
 { 
     int age_int;
     int weight_int;
+    int height_int;
+    
+    HealthFormulaObject Formula;
+    
    enum Gender 
            { 
                male, female
@@ -29,6 +33,7 @@ public class DefaultPanel extends JPanel implements ActionListener
    public JLabel Gender;
    public JLabel Age;
    public JLabel weight;
+   public JLabel BMI;
    
    public JRadioButton Male;
    public JRadioButton Female;
@@ -73,8 +78,12 @@ public class DefaultPanel extends JPanel implements ActionListener
         }
         else if (source == Calculate)
         {
-          age_int    = Integer.parseInt(Age.getText());
-          weight_int = Integer.parseInt(weight.getText());
+           
+         age_int    = Integer.parseInt(AgeText.getText());
+          weight_int = Integer.parseInt(WeightText.getText());
+          height_int = Integer.parseInt(HeightText.getText());
+          //Formula.CalculateBMI(weight_int, height_int, age_int);
+          BMI.setText("Your BMI is: " + Formula.CalculateBMI(weight_int, height_int, age_int));
         }
     }
     
@@ -83,7 +92,8 @@ public class DefaultPanel extends JPanel implements ActionListener
     
     void initVariables()
     {
-          
+        
+      BMI        = new     JLabel   ("BMI");
       Label      = new     JLabel ("Label");
       Gender     = new     JLabel("Gender");
       Age        = new     JLabel   ("Age");
@@ -94,6 +104,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       HeightText = new         JTextField();
       height     = new     JLabel("Height");
       
+      BMI.setVisible(true);
       Calculate.setVisible(true);
       AgeText.setVisible(true);
       WeightText.setVisible(true);
@@ -104,6 +115,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       height.setVisible(true);
       
       
+      BMI.setBounds(150, 250, 500, 500);
       Calculate.setBounds(130, 150, 150, 50);
       WeightText.setBounds(110,  105, 50, 20);
       AgeText.setBounds(110, 85, 50, 20);
@@ -137,7 +149,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       BG.add(Male);
       BG.add(Female);
       
-      
+      Formula = new HealthFormulaObject();
     }
     void addVariables()
     {
@@ -153,6 +165,7 @@ public class DefaultPanel extends JPanel implements ActionListener
        this.add(Female);
        this.add(height);
        this.add(HeightText);
+       this.add(BMI);
     }
     
     
