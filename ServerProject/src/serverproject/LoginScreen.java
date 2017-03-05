@@ -22,6 +22,8 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
 {
     JTextField EnterUserName;
     JTextField EnterPassword;
+    String CurrentUserName = "";
+    String CurrentPassword = "";
     String  User;
     String  PassWd;
     UserInformation customer;
@@ -95,6 +97,10 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
              //  this.remove(LS);
               // this.add(DP);
               this.CP.LoggingIn();
+              this.CurrentUserName = User;
+              this.CurrentPassword = PassWd;
+              CP.CurrentUser = User;
+              CP.CurrentPassword = PassWd;
             }
             else
             {

@@ -23,6 +23,8 @@ public class ContainerPanel extends JPanel implements KeyListener, ActionListene
      DefaultPanel DP;
      JFrame Frame;
      CardLayout cardLayout;
+     String CurrentUser = "";
+     String CurrentPassword = "";
     public ContainerPanel(JFrame Frame)
     {
         super();

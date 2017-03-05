@@ -23,7 +23,7 @@ public class ServerProject {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+     
          ServerThread[] ServerThreadArray;
            ServerThreadArray = new ServerThread[10];
                    
@@ -65,6 +65,13 @@ public class ServerProject {
             JFrame Frame = null;
             ContainerPanel Panel = null;
             
+               SavedUserInformationManager test = new SavedUserInformationManager();
+            try {
+                test.SaveUserInfo(CustomerInfo);
+            } catch (JAXBException ex) {
+                Logger.getLogger(ServerProject.class.getName()).log(Level.SEVERE, null, ex);
+            }
+           
             Frame =   InitSetUpFrame(Frame);
             Panel =   InitSetUpPanel(Panel,Frame);
            
