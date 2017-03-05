@@ -26,7 +26,7 @@ public class LoginScreen extends JPanel implements ActionListener, KeyListener
     String  PassWd;
     UserInformation customer;
     ContainerPanel CP;
-     String FileName = "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\User02.xml";
+     String FileName = "C:\\Users\\wojton\\Documents\\GitHub\\ClientServer\\ClientServer\\ServerProject\\src\\serverproject\\User02.xml";
   public LoginScreen(JFrame Frame, ContainerPanel CP)
    {
         super();

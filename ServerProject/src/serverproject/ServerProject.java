@@ -57,7 +57,7 @@ public class ServerProject {
         @Override
         public void run()
         {
-           String FileName = "C:\\Users\\Admin\\Documents\\GitHub\\ServerProject\\src\\serverproject\\ServerXML.xml";
+           String FileName = "C:\\Users\\wojton\\Documents\\GitHub\\ClientServer\\ClientServer\\ServerProject\\src\\serverproject\\ServerXML.xml";
            CustomerInfo = new UserInformation();
            CustomerInfo.Name = "Jill Stein";
            CustomerInfo.age  = 6245;
