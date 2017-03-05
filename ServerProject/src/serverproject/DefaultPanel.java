@@ -7,8 +7,11 @@ package serverproject;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.*;
+import javax.xml.bind.JAXBException;
 /**
  *
  * @author Admin
@@ -19,6 +22,7 @@ public class DefaultPanel extends JPanel implements ActionListener
     int age_int;
     int weight_int;
     int height_int;
+    UserInformation User = new UserInformation();
     
     HealthFormulaObject Formula;
     
@@ -38,16 +42,18 @@ public class DefaultPanel extends JPanel implements ActionListener
    public JRadioButton Male;
    public JRadioButton Female;
    public JButton      Calculate;
+   public JButton      Save;
    
    public JTextField HeightText;
    public JTextField AgeText;
    public JTextField WeightText;
    Gender gender;
+   ContainerPanel CP; 
    
-   
-   DefaultPanel(JFrame Frame)
+   DefaultPanel(JFrame Frame, ContainerPanel CP)
    {
        super();
+       this.CP = CP;
      this.initVariables();
      this.addVariables();
       this.setBackground(Color.WHITE);
@@ -79,11 +85,27 @@ public class DefaultPanel extends JPanel implements ActionListener
         else if (source == Calculate)
         {
            
-         age_int    = Integer.parseInt(AgeText.getText());
+          age_int    = Integer.parseInt(AgeText.getText());
           weight_int = Integer.parseInt(WeightText.getText());
           height_int = Integer.parseInt(HeightText.getText());
           //Formula.CalculateBMI(weight_int, height_int, age_int);
+          User.setAge(age_int);
+          User.setHeight(height_int);
+          User.setWeight(weight_int);
           BMI.setText("Your BMI is: " + Formula.CalculateBMI(weight_int, height_int, age_int));
+        }
+        else if (source == Save)
+        {
+            User.setUserName(CP.CurrentUser);
+            User.setAge(age_int);
+          User.setHeight(height_int);
+          User.setWeight(weight_int);
+            SavedUserInformationManager SUIM = new SavedUserInformationManager();
+            try {
+                SUIM.SaveUserInfo(User);
+            } catch (JAXBException ex) {
+                Logger.getLogger(DefaultPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -103,6 +125,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       Calculate  = new JButton("Calculate");
       HeightText = new         JTextField();
       height     = new     JLabel("Height");
+      Save       = new      JButton("Save");
       
       BMI.setVisible(true);
       Calculate.setVisible(true);
@@ -113,6 +136,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       weight.setVisible(true);
       HeightText.setVisible(true);
       height.setVisible(true);
+      Save.setVisible(true);
       
       
       BMI.setBounds(150, 250, 500, 500);
@@ -124,6 +148,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       weight.setBounds(50, 90, 50, 50);
       height.setBounds(50, 110, 50, 50);
       HeightText.setBounds(110, 125, 50, 20);
+      Save.setBounds(130, 200, 150, 50);
       
       Male   = new JRadioButton  ("Male");
       Female = new JRadioButton("Female");
@@ -143,6 +168,7 @@ public class DefaultPanel extends JPanel implements ActionListener
       WeightText.addActionListener(this);
       AgeText.addActionListener(this);
       Calculate.addActionListener(this);
+      Save.addActionListener(this);
       
       ButtonGroup BG = new ButtonGroup();
       
@@ -166,6 +192,7 @@ public class DefaultPanel extends JPanel implements ActionListener
        this.add(height);
        this.add(HeightText);
        this.add(BMI);
+       this.add(Save);
     }
     
     

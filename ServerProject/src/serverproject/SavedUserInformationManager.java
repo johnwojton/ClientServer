@@ -27,7 +27,7 @@ public class SavedUserInformationManager
     {
         URL location = SavedUserInformationManager.class.getProtectionDomain().getCodeSource().getLocation();
            String FilePath =  location.getPath();
-           FilePath += "UserData";
+           FilePath += "UserData/";
            System.out.println(FilePath);
            
     File dir = new File(FilePath);
@@ -53,13 +53,24 @@ public class SavedUserInformationManager
       System.out.println("failed trying to create the directory");
     }
    int CheckFileReturn = CheckFilesForUserData(FilePath, customer);
+   int NumberOfFiles = getNumberofFiles (FilePath);
    if (CheckFileReturn == -1)
    {
-       
+       if (NumberOfFiles == 0)
+       {
+           FilePath += "UserData_" + 0;
+           XMLFileController.XMLWrite(customer, FilePath);
+       }
+       else
+       {
+           FilePath += "UserData_" + (NumberOfFiles - 1);
+           XMLFileController.XMLWrite(customer, FilePath);
+       }
    }
    else
    {
-       
+       FilePath += "UserData_" + CheckFileReturn;
+           XMLFileController.XMLWrite(customer, FilePath);
    }
   }
     /***
@@ -77,13 +88,17 @@ public class SavedUserInformationManager
        {
            return -1;
        }
-       for(int i = 0; i <= NumberOfFiles; i++)
+       for(int i = 0; i < NumberOfFiles; i++)
        {
            SourcePath += "UserData_" + i;
            CustomerInFile = XMLFileController.XMLReader(SourcePath);
           if(CustomerInFile.UserName.equalsIgnoreCase(customer.UserName))
           {
               return i;
+          }
+          else
+          {
+              return 5;
           }
            
        }

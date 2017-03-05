@@ -138,7 +138,7 @@ public class ContainerPanel extends JPanel implements KeyListener, ActionListene
     {
             System.out.println("logging out");
             this.remove(LS);
-              DP = new DefaultPanel(this.Frame);
+              DP = new DefaultPanel(this.Frame, this);
             DP.setVisible(true);
            DP.setBounds( this.getBounds());
            DP.setEnabled(true);

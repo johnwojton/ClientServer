@@ -22,7 +22,11 @@ public class UserInformation
      Date DOB;
       // @XmlElement(name="age")
     int age;
-     // @XmlElement(name="USerName")
+     // @XmlElement(name="weight")
+    int weight;
+    // @XmlElement(name="height")
+    int height;
+    // @XmlElement(name="UserName")
     String UserName;
     // @XmlElement(name="Password")
     String Password;
@@ -32,6 +36,14 @@ public class UserInformation
         male, female
     };
     Gender gender;
+    public void setWeight(int weight)
+    {
+        this.weight = weight;
+    }
+    public void setHeight(int height)
+    {
+        this.height = height;
+    }
     public void setUserName(String UserName)
     {
         this.UserName = UserName;
@@ -79,6 +91,14 @@ public class UserInformation
     public String getPassword()
     {
        return this.Password;
+    }
+    public int getHeight()
+    {
+        return this.height;
+    }
+    public int getWeight()
+    {
+        return this.weight;
     }
     
 }
